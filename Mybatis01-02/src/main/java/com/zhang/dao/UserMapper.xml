@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--        namespace绑定一个对应的Mapper接口-->
+<mapper namespace="com.zhang.dao.User01Mapper">
+
+<!--    结果集映射；colomn为数据库中的字段，property为实体类中的属性-->
+<!--    这个操作最重要的是一对多查询和联结查询-->
+    <resultMap id="UserMap" type="com.zhang.proj.User01">
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="pwd" property="passwrod"></result>
+    </resultMap>
+
+    <select id="getUserByIndexx" resultType="com.zhang.proj.User01" parameterType="map">
+        select *
+        from db3.zhang
+        limit #{startIndex},#{pageSize}
+    </select>
+
+<!--    当需要进行结果集映射的时候就必须是resultMap关键字-->
+    <select id="getUserById" resultMap="UserMap">
+        select * from db3.zhang where id = #{id}
+    </select>
+
+</mapper>

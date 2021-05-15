@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--        namespace绑定一个对应的Mapper接口-->
+<mapper namespace="com.zhang.dao.User01Mapper">
+<!--    select查询语句-->
+<!--    id表示mapper映射User01Mapper中的方法名，resultType表示返回值类型按照什么类型的结果集返回，这个就是按照User01类中定义的形式返回-->
+    <select id="getUserList" resultType="com.zhang.proj.User01">
+        select * from db3.zhang
+    </select>
+    
+    <select id="getUserById" resultType="com.zhang.proj.User01" parameterType="int">
+        select * from db3.zhang where id = #{id}
+    </select>
+    
+    <insert id="addUser" parameterType="com.zhang.proj.User01">
+        insert into db3.zhang (id, name, pwd) value (#{id},#{name},#{pwd});
+    </insert>
+
+    <insert id="addUser2" parameterType="map">
+        insert into db3.zhang (id, name, pwd) value (#{zhangid},#{zhangname},#{zhangpwd});
+    </insert>
+    
+    <update id="updataUser" parameterType="com.zhang.proj.User01">
+        update db3.zhang set name=#{name},pwd=#{pwd}  where id=#{id};
+    </update>
+    
+    <delete id="deleteUser" parameterType="int">
+        delete from db3.zhang where id=#{id};
+    </delete>
+</mapper>
